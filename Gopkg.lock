@@ -63,6 +63,14 @@
   version = "1.0.1"
 
 [[projects]]
+  branch = "master"
+  digest = "1:aa9d2cd5ce31eb9cfec730f15a61a0153bd9837f3c3ed8e43776f1ecceda322c"
+  name = "github.com/mrjones/oauth"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f4e24b6d100c9436cbfe5d439581653d455490e7"
+
+[[projects]]
   digest = "1:03aa6e485e528acb119fb32901cf99582c380225fc7d5a02758e08b180cb56c3"
   name = "github.com/ugorji/go"
   packages = ["codec"]
@@ -97,6 +105,9 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/gin-gonic/gin"]
+  input-imports = [
+    "github.com/gin-gonic/gin",
+    "github.com/mrjones/oauth",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

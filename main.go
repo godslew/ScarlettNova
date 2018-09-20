@@ -9,5 +9,6 @@ func main() {
 	r := gin.Default()
 	ping := controllers.NewPingController(r)
 	ping.GetPing()
-	r.Run()
+	ping.PostPing()
+	r.Run(":19810")
 }

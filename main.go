@@ -10,5 +10,8 @@ func main() {
 	ping := controllers.NewPingController(r)
 	ping.GetPing()
 	ping.PostPing()
+
+	twitter := controllers.NewTwitterController(r)
+	twitter.GetCrcToken()
 	r.Run(":19810")
 }

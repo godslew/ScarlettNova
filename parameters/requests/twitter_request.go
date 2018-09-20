@@ -1,20 +1,20 @@
 package requests
 
 // GET Request (CRC Check)
-type TwitterWebhookGetRequest struct {
-	CrcToken string `json:"crc_token" mapstructure:"crc_token"`
+type GetTwitterWebHookRequest struct {
+	CrcToken string `json:"crc_token" form:"crc_token" binding:"required"`
 }
 
-func NewTwitterWebhookGetRequest() TwitterWebhookGetRequest {
-	return TwitterWebhookGetRequest{}
+func NewGetTwitterWebhookRequest() GetTwitterWebHookRequest {
+	return GetTwitterWebHookRequest{}
 }
 
-func (r *TwitterWebhookGetRequest) Validate() error {
+func (r *GetTwitterWebHookRequest) Validate() error {
 	return nil
 }
 
 // POST Request
-type TwitterWebhookPostRequest struct {
+type PostTwitterWebHookRequest struct {
 	DirectMessageEvents []struct {
 		Type          string `json:"type"`
 		ID            string `json:"id"`
@@ -30,11 +30,11 @@ type TwitterWebhookPostRequest struct {
 	} `json:"direct_message_events"`
 }
 
-func NewTwitterWebhookPostRequest() TwitterWebhookPostRequest {
-	return TwitterWebhookPostRequest{}
+func NewPostTwitterWebhookRequest() PostTwitterWebHookRequest {
+	return PostTwitterWebHookRequest{}
 }
 
-func (r *TwitterWebhookPostRequest) Validate() error {
+func (r *PostTwitterWebHookRequest) Validate() error {
 	return nil
 }
 

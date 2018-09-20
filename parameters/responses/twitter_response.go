@@ -1,9 +1,9 @@
 package responses
 
-type TwitterWebHookCrcCheckResponse struct {
+type GetTwitterWebHookCrcCheckResponse struct {
 	Token string `json:"response_token"`
 }
 
-func NewTwitterWebHookCrcCheckResponse() TwitterWebHookCrcCheckResponse {
-	return TwitterWebHookCrcCheckResponse{}
+func NewGetTwitterWebHookCrcCheckResponse() GetTwitterWebHookCrcCheckResponse {
+	return GetTwitterWebHookCrcCheckResponse{}
 }

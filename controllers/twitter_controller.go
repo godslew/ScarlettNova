@@ -35,3 +35,45 @@ func (c *TwitterController) getCrcToken(ctx *gin.Context) {
 	res.Token = twitter.CreateCRCToken(req.CrcToken)
 	ctx.JSON(http.StatusOK, res)
 }
+
+func (c *TwitterController) PostWebHook() {
+	c.engine.POST("/twitter_webhook", c.postWebHook)
+}
+
+func (c *TwitterController) postWebHook(ctx *gin.Context) {
+	req := requests.NewGetTwitterWebhookRequest()
+	if err := ctx.Bind(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, err)
+	}
+
+	fmt.Print(req)
+
+	res := responses.NewGetTwitterWebHookCrcCheckResponse()
+	res.Token = twitter.CreateCRCToken(req.CrcToken)
+	ctx.JSON(http.StatusOK, res)
+}
+
+func (c *TwitterController) PostWebHookTest() {
+	c.engine.POST("/twitter_webhook/test", c.postWebHookTest)
+}
+
+func (c *TwitterController) postWebHookTest(ctx *gin.Context) {
+	req := requests.NewPostTwitterWebHookTestRequest()
+	if err := ctx.BindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, err)
+	}
+
+	fmt.Print(req)
+
+	client, err := twitter.CreateTwitterClient()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+	}
+
+	dmReq := requests.NewPostDirectMessageTestRequest(req.ID, req.Message)
+	fmt.Print(dmReq)
+	if err := twitter.PostDM(client, dmReq); err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+	}
+	ctx.JSON(http.StatusNoContent, "")
+}

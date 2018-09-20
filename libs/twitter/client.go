@@ -40,7 +40,7 @@ func CreateTwitterClient() (*http.Client, error) {
 			AuthorizeTokenUrl: "https://api.twitter.com/oauth/authorize",
 			AccessTokenUrl:    "https://api.twitter.com/oauth/access_token",
 		})
-	c.Debug(false)
+	c.Debug(true)
 
 	t := oauth.AccessToken{
 		Token:  at,

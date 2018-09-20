@@ -83,3 +83,35 @@ type Ctas []struct {
 	Label string `json:"label"`
 	URL   string `json:"url"`
 }
+
+// POST Request
+type PostTwitterWebHookTestRequest struct {
+	ID      string `json:"id" binding:"required"`
+	Message string `json:"message"`
+}
+
+func NewPostTwitterWebHookTestRequest() PostTwitterWebHookTestRequest {
+	return PostTwitterWebHookTestRequest{}
+}
+
+type PostDirectMessageTestRequest struct {
+	Event struct {
+		Type          string `json:"type"`
+		MessageCreate struct {
+			Target struct {
+				RecipientID string `json:"recipient_id"`
+			} `json:"target"`
+			MessageData struct {
+				Text string `json:"text"`
+			} `json:"message_data"`
+		} `json:"message_create"`
+	} `json:"event"`
+}
+
+func NewPostDirectMessageTestRequest(recipientID string, text string) PostDirectMessageTestRequest {
+	req := PostDirectMessageTestRequest{}
+	req.Event.Type = "message_create"
+	req.Event.MessageCreate.Target.RecipientID = recipientID
+	req.Event.MessageCreate.MessageData.Text = text
+	return req
+}

@@ -13,5 +13,7 @@ func main() {
 
 	twitter := controllers.NewTwitterController(r)
 	twitter.GetCrcToken()
+	twitter.PostWebHook()
+	twitter.PostWebHookTest()
 	r.Run(":19810")
 }

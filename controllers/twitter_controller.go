@@ -47,7 +47,21 @@ func (c *TwitterController) postWebHook(ctx *gin.Context) {
 	}
 
 	fmt.Print(req)
-
+	client, err := twitter.CreateTwitterClient()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+	}
+	for _, e := range req.DirectMessageEvents {
+		if e.Type != "message_create" {
+			continue
+		}
+		text := "仕事お疲れ様！頑張ったね！！"
+		dmReq := requests.NewPostDirectMessageTestRequest(e.MessageCreate.SenderID, text)
+		fmt.Print(dmReq)
+		if err := twitter.PostDM(client, dmReq); err != nil {
+			ctx.JSON(http.StatusInternalServerError, err)
+		}
+	}
 	ctx.JSON(http.StatusOK, "")
 }
 

@@ -41,16 +41,14 @@ func (c *TwitterController) PostWebHook() {
 }
 
 func (c *TwitterController) postWebHook(ctx *gin.Context) {
-	req := requests.NewGetTwitterWebhookRequest()
+	req := requests.NewPostTwitterWebhookRequest()
 	if err := ctx.Bind(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, err)
 	}
 
 	fmt.Print(req)
 
-	res := responses.NewGetTwitterWebHookCrcCheckResponse()
-	res.Token = twitter.CreateCRCToken(req.CrcToken)
-	ctx.JSON(http.StatusOK, res)
+	ctx.JSON(http.StatusOK, "")
 }
 
 func (c *TwitterController) PostWebHookTest() {

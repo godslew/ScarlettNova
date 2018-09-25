@@ -10,6 +10,8 @@ Twitter DM chat bot
 go get -u github.com/golang/dep/cmd/dep
 go get -u github.com/direnv/direnv
 
+dep ensure
+
 # 環境変数を.envrc (direnv) で管理している
 echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
 cp .envrc.sample .envrc
